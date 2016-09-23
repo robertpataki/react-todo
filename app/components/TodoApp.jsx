@@ -6,6 +6,8 @@ const TodoSearch = require('TodoSearch');
 var TodoApp = React.createClass({
   getInitialState: function() {
     return {
+      searchText: '',
+      showCompleted: false,
       initialTodos: [
         {
           id: 1,
@@ -47,14 +49,10 @@ var TodoApp = React.createClass({
     });
   },
 
-  handleSearch: function(searchTerm) {
-    var filteredTodos = this.state.initialTodos;
-    filteredTodos = filteredTodos.filter(function(item){
-      return item.text.toLowerCase().search(searchTerm.toLowerCase()) !== -1;
-    });
-
+  handleSearch: function(showCompleted, searchText) {
     this.setState({
-      todos: filteredTodos
+      showCompleted: showCompleted,
+      searchText: searchText
     });
   },
 

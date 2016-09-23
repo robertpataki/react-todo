@@ -12,18 +12,31 @@ describe('TodoSearch', () => {
     expect(todoSearch).toExist();
   });
 
-  it('should should call `onSearch` when the user is typing', () => {
+  it('should should call `onSearch` with the `searchText` when the user is typing', () => {
     var spy = expect.createSpy();
     var todoSearch = TestUtils.renderIntoDocument(<TodoSearch onSearch={spy}/>);
     var $el = $(ReactDOM.findDOMNode(todoSearch));
     var $formEl = $($el.find('form')[0]);
-    var input = $formEl.find('input[name="searchTerm"]')[0];
+    var input = $formEl.find('input[name="searchText"]')[0];
 
-    var searchTerm = 'Hello World';
+    var searchText = 'Hello World';
 
-    input.value = searchTerm;
+    input.value = searchText;
     TestUtils.Simulate.change(input);
 
-    expect(spy).toHaveBeenCalledWith(searchTerm);
+    expect(spy).toHaveBeenCalledWith(false, searchText);
+  });
+
+  it('should should call `onSearch` with the checked value of the `showCompleted` variable', () => {
+    var spy = expect.createSpy();
+    var todoSearch = TestUtils.renderIntoDocument(<TodoSearch onSearch={spy}/>);
+    var $el = $(ReactDOM.findDOMNode(todoSearch));
+    var $formEl = $($el.find('form')[0]);
+    var checkbox = $formEl.find('input[name="showCompleted"]')[0];
+
+    checkbox.checked = 'checked';
+    TestUtils.Simulate.change(checkbox);
+
+    expect(spy).toHaveBeenCalledWith(true, '');
   });
 });
