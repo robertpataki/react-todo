@@ -27,7 +27,15 @@ var TodoApp = React.createClass({
   },
 
   handleAddTodo: function(todoText) {
-    console.log('todoText: ', todoText);
+    var updatedTodos = this.state.todos;
+    updatedTodos.push({
+      id: updatedTodos.length + 1,
+      text: todoText
+    });
+
+    this.setState({
+      todos: updatedTodos
+    });
   },
 
   render: function() {
