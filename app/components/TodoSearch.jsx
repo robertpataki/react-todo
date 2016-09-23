@@ -11,10 +11,8 @@ var TodoSearch = React.createClass({
   render: function () {
     return (
       <div className="todo-search">
-        <form>
-          <input type="text" name="searchText" ref="searchText" placeholder="Ener keyword" onChange={this.handleSearch} />
-          <label><input type="checkbox" name="showCompleted" ref="showCompleted" onChange={this.handleSearch}/>Show Completed Todos</label>
-        </form>
+        <input type="text" name="searchText" ref="searchText" placeholder="Ener keyword" onChange={this.handleSearch} />
+        <label><input type="checkbox" name="showCompleted" ref="showCompleted" onChange={this.handleSearch}/>Show Completed Todos</label>
       </div>
     );
   }

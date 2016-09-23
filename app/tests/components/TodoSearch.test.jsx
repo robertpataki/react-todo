@@ -16,8 +16,7 @@ describe('TodoSearch', () => {
     var spy = expect.createSpy();
     var todoSearch = TestUtils.renderIntoDocument(<TodoSearch onSearch={spy}/>);
     var $el = $(ReactDOM.findDOMNode(todoSearch));
-    var $formEl = $($el.find('form')[0]);
-    var input = $formEl.find('input[name="searchText"]')[0];
+    var input = $el.find('input[name="searchText"]')[0];
 
     var searchText = 'Hello World';
 
@@ -31,8 +30,7 @@ describe('TodoSearch', () => {
     var spy = expect.createSpy();
     var todoSearch = TestUtils.renderIntoDocument(<TodoSearch onSearch={spy}/>);
     var $el = $(ReactDOM.findDOMNode(todoSearch));
-    var $formEl = $($el.find('form')[0]);
-    var checkbox = $formEl.find('input[name="showCompleted"]')[0];
+    var checkbox = $el.find('input[name="showCompleted"]')[0];
 
     checkbox.checked = 'checked';
     TestUtils.Simulate.change(checkbox);
