@@ -1,5 +1,5 @@
-const React = require('react');
 const moment = require('moment');
+const React = require('react');
 
 var Todo = React.createClass({
   handleClick: function() {
@@ -9,6 +9,7 @@ var Todo = React.createClass({
 
   render: function() {
     var {id, text, completed, createdAt, completedAt} = this.props;
+    var todoClassName = completed ? 'todo todo-completed' : 'todo';
 
     var renderDate = () => {
       var message = completed ? 'Completed ' : 'Created ';
@@ -18,11 +19,15 @@ var Todo = React.createClass({
     }
 
     return (
-      <label className={"todo todo-" + id} onClick={this.handleClick}>
-        <input type="checkbox" defaultChecked={completed} />
-        <p>{text}</p>
-        <p>{renderDate()}</p>
-      </label>
+      <div className={todoClassName} onClick={this.handleClick}>
+        <div>
+          <input type="checkbox" defaultChecked={completed} />
+        </div>
+        <div>
+          <p>{text}</p>
+          <p className="todo__subtext">{renderDate()}</p>
+        </div>
+      </div>
     )
   }
 });
