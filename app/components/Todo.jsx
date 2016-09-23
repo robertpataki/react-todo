@@ -13,7 +13,8 @@ var Todo = React.createClass({
     var renderDate = () => {
       var message = completed ? 'Completed ' : 'Created ';
       var timestamp = completed ? completedAt : createdAt;
-      return message + moment.unix(timestamp).format('MMM Do YYYY @ h:mm a');
+      return message + moment.unix(timestamp).fromNow();
+      // return message + moment.unix(timestamp).format('MMM Do YYYY @ h:mm a');
     }
 
     return (
