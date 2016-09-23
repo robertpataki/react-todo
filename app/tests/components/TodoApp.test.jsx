@@ -25,4 +25,41 @@ describe('TodoApp', () => {
       expect(todos[updatedTodosCount - 1].text).toBe(newTodoText);
     });
   });
+
+  describe('handleSearch', () => {
+    it('should filter the todos to show only the ones containing the search string', () => {
+      var todoApp = TestUtils.renderIntoDocument(<TodoApp />);
+      var initialTodos = [
+        {
+          id: 1,
+          text: 'Hello World'
+        }, {
+          id: 2,
+          text: 'Goodbye'
+        }, {
+          id: 3,
+          text: 'Hello You'
+        }
+      ];
+
+      todoApp.setState({
+        initialTodos: initialTodos,
+        todos: initialTodos
+      });
+
+      todoApp.handleSearch('Hello');
+
+      var todos = todoApp.state.todos;
+
+      expect(todos).toEqual([
+        {
+          id: 1,
+          text: 'Hello World'
+        }, {
+          id: 3,
+          text: 'Hello You'
+        }
+      ]);
+    });
+  });
 });
