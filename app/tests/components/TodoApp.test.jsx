@@ -1,10 +1,11 @@
-var React = require('react');
-var ReactDOM = require('react-dom');
-var TestUtils = require('react-addons-test-utils');
-var $ = require('jQuery');
-var expect = require('expect');
+const React = require('react');
+const ReactDOM = require('react-dom');
+const TestUtils = require('react-addons-test-utils');
+const $ = require('jQuery');
+const expect = require('expect');
+const moment = require('moment');
 
-var TodoApp = require('TodoApp');
+const TodoApp = require('TodoApp');
 
 describe('TodoApp', () => {
   it('should exist', () => {
@@ -22,13 +23,15 @@ describe('TodoApp', () => {
     todoApp.handleAddTodo(todoText);
 
     expect(todoApp.state.todos[0].text).toBe(todoText);
+    expect(todoApp.state.todos[0].createdAt).toBeA('number');
   });
 
   it('should toggle `completed` value when `handleToggle` is called', () => {
     var todoData = [{
       id: 11,
       text: 'Test features',
-      completed: false
+      completed: false,
+      completedAt: undefined
     }];
 
     var todoApp = TestUtils.renderIntoDocument(<TodoApp />);
@@ -37,45 +40,24 @@ describe('TodoApp', () => {
     });
 
     expect(todoApp.state.todos[0].completed).toBe(false);
-
     todoApp.handleToggle(11);
     expect(todoApp.state.todos[0].completed).toBe(true);
+    expect(todoApp.state.todos[0].completedAt).toBeA('number');
   });
 
-  // describe('handleSearch', () => {
-  //   it('should filter the todos to show only the ones containing the search string', () => {
-  //     var todoApp = TestUtils.renderIntoDocument(<TodoApp />);
-  //     var initialTodos = [
-  //       {
-  //         id: 1,
-  //         text: 'Hello World'
-  //       }, {
-  //         id: 2,
-  //         text: 'Goodbye'
-  //       }, {
-  //         id: 3,
-  //         text: 'Hello You'
-  //       }
-  //     ];
-  //
-  //     todoApp.setState({
-  //       initialTodos: initialTodos,
-  //       todos: initialTodos
-  //     });
-  //
-  //     todoApp.handleSearch('Hello');
-  //
-  //     var todos = todoApp.state.todos;
-  //
-  //     expect(todos).toEqual([
-  //       {
-  //         id: 1,
-  //         text: 'Hello World'
-  //       }, {
-  //         id: 3,
-  //         text: 'Hello You'
-  //       }
-  //     ]);
-  //   });
-  // });
+  it('should remove `completedAt` when `completed` is toggled from `true` to `false`', () => {
+    var todoData = [{
+      id: 11,
+      text: 'Test features',
+      completed: true,
+      completedAt: moment().unix()
+    }];
+
+    var todoApp = TestUtils.renderIntoDocument(<TodoApp />);
+
+    expect(todoApp.state.todos[0].completed).toBe(true);
+    todoApp.handleToggle(11);
+    expect(todoApp.state.todos[0].completed).toBe(false);
+    expect(todoApp.state.todos[0].completedAt).toNotExist();
+  });
 });
