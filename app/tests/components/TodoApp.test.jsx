@@ -11,55 +11,53 @@ describe('TodoApp', () => {
     expect(TodoApp).toExist();
   });
 
-  describe('handleAddTodo', () => {
-    it('should create a new Todo item', () => {
-      var todoApp = TestUtils.renderIntoDocument(<TodoApp />);
-      var todos = todoApp.state.todos;
-      var newTodoText = 'New Todo text';
-      var oldTodosCount = todos.length;
+  it('should add todo to the todos state on handleAppTodo', () => {
+    var todoText = 'Test Text';
+    var todoApp = TestUtils.renderIntoDocument(<TodoApp />);
 
-      todoApp.handleAddTodo(newTodoText);
-      var updatedTodosCount = todos.length;
-
-      expect(oldTodosCount).toBe(updatedTodosCount - 1);
-      expect(todos[updatedTodosCount - 1].text).toBe(newTodoText);
+    todoApp.setState({
+      todos: []
     });
+
+    todoApp.handleAddTodo(todoText);
+
+    expect(todoApp.state.todos[0].text).toBe(todoText);
   });
-
-  describe('handleSearch', () => {
-    it('should filter the todos to show only the ones containing the search string', () => {
-      var todoApp = TestUtils.renderIntoDocument(<TodoApp />);
-      var initialTodos = [
-        {
-          id: 1,
-          text: 'Hello World'
-        }, {
-          id: 2,
-          text: 'Goodbye'
-        }, {
-          id: 3,
-          text: 'Hello You'
-        }
-      ];
-
-      todoApp.setState({
-        initialTodos: initialTodos,
-        todos: initialTodos
-      });
-
-      todoApp.handleSearch('Hello');
-
-      var todos = todoApp.state.todos;
-
-      expect(todos).toEqual([
-        {
-          id: 1,
-          text: 'Hello World'
-        }, {
-          id: 3,
-          text: 'Hello You'
-        }
-      ]);
-    });
-  });
+  
+  // describe('handleSearch', () => {
+  //   it('should filter the todos to show only the ones containing the search string', () => {
+  //     var todoApp = TestUtils.renderIntoDocument(<TodoApp />);
+  //     var initialTodos = [
+  //       {
+  //         id: 1,
+  //         text: 'Hello World'
+  //       }, {
+  //         id: 2,
+  //         text: 'Goodbye'
+  //       }, {
+  //         id: 3,
+  //         text: 'Hello You'
+  //       }
+  //     ];
+  //
+  //     todoApp.setState({
+  //       initialTodos: initialTodos,
+  //       todos: initialTodos
+  //     });
+  //
+  //     todoApp.handleSearch('Hello');
+  //
+  //     var todos = todoApp.state.todos;
+  //
+  //     expect(todos).toEqual([
+  //       {
+  //         id: 1,
+  //         text: 'Hello World'
+  //       }, {
+  //         id: 3,
+  //         text: 'Hello You'
+  //       }
+  //     ]);
+  //   });
+  // });
 });
