@@ -6,17 +6,21 @@ const TodoApp = require('TodoApp');
 
 const actions = require('actions');
 const store = require('configureStore').configure();
+const TodoAPI = require('TodoAPI');
 
 // Load Foundation
 $(document).foundation();
 
 store.subscribe(() => {
-  console.log('New state: ', store.getState());
+  var state = store.getState();
+  TodoAPI.setTodos(state.todos);
+
+  console.log('New state: ', state);
 })
 
-// store.dispatch(actions.addTodo('Learn Redux'));
-store.dispatch(actions.setSearchText('Red'));
-// store.dispatch(actions.toggleShowCompleted());
+var initialTodos = TodoAPI.getTodos();
+console.log(initialTodos);
+store.dispatch(actions.addTodos(initialTodos));
 
 // App css
 require('style!css!sass!applicationStyles');
