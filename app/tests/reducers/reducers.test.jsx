@@ -1,6 +1,7 @@
 const expect = require('expect');
-const {searchTextReducer, toggleShowCompletedReducer} = require('reducers');
+const reducers = require('reducers');
 const df = require('deep-freeze-strict');
+const moment = require('moment');
 
 describe('Reducers', () => {
   describe('searchTextReducer', () => {
@@ -10,7 +11,7 @@ describe('Reducers', () => {
         searchText: 'Searching for...'
       };
 
-      var response = searchTextReducer(df(''), df(action));
+      var response = reducers.searchTextReducer(df(''), df(action));
       expect(response).toEqual(action.searchText);
     });
   });
@@ -21,8 +22,39 @@ describe('Reducers', () => {
         type: 'TOGGLE_SHOW_COMPLETED'
       };
 
-      var response = toggleShowCompletedReducer(df(false), df(action));
+      var response = reducers.toggleShowCompletedReducer(df(false), df(action));
       expect(response).toEqual(true);
+    });
+  });
+
+  describe('todosReducer', () => {
+    it('should add new todo', () => {
+      var action = {
+        type: 'ADD_TODO',
+        text: 'New todo to be done later'
+      }
+
+      var response = reducers.todosReducer(df([]), df(action));
+      expect(response.length).toBe(1);
+      expect(response[0].text).toEqual(action.text);
+    });
+
+    it('should toggle todo', () => {
+      var action = {
+        type: 'TOGGLE_TODO',
+        id: 1
+      }
+      var todos = [{
+        id: 1,
+        text: 'Todo #1',
+        createdAt: 123,
+        completedAt: 125,
+        completed: true
+      }];
+
+      var response = reducers.todosReducer(df(todos), df(action));
+      expect(response[0].completed).toBe(false);
+      expect(response[0].completedAt).toEqual(undefined);
     });
   });
 });
