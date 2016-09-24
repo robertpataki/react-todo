@@ -14,9 +14,9 @@ store.subscribe(() => {
   console.log('New state: ', store.getState());
 })
 
-store.dispatch(actions.addTodo('Learn Redux'));
+// store.dispatch(actions.addTodo('Learn Redux'));
 store.dispatch(actions.setSearchText('Red'));
-store.dispatch(actions.toggleShowCompleted());
+// store.dispatch(actions.toggleShowCompleted());
 
 // App css
 require('style!css!sass!applicationStyles');

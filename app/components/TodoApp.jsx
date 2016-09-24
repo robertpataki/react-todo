@@ -2,10 +2,11 @@ const React = require('react');
 const uuid = require('node-uuid');
 const moment = require('moment');
 
+const TodoAPI = require('TodoAPI');
+
 import TodoList from 'TodoList';
 import AddTodo from 'AddTodo';
-const TodoSearch = require('TodoSearch');
-const TodoAPI = require('TodoAPI');
+import TodoSearch from 'TodoSearch';
 
 var TodoApp = React.createClass({
   getInitialState: function() {
@@ -53,9 +54,9 @@ var TodoApp = React.createClass({
         <div className="row">
           <div className="columns small-centered small-11 medium-6 large-4">
             <div className="container">
-              <TodoSearch onSearch={this.handleSearch}/>
+              <TodoSearch/>
               <TodoList/>
-              <AddTodo onAddTodo={this.handleAddTodo}/>
+              <AddTodo/>
             </div>
           </div>
         </div>
