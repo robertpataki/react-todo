@@ -1,10 +1,21 @@
-var React = require('react');
-var ReactDOM = require('react-dom');
+const React = require('react');
+const ReactDOM = require('react-dom');
 
-var TodoApp = require('TodoApp');
+const TodoApp = require('TodoApp');
+
+const actions = require('actions');
+const store = require('configureStore').configure();
 
 // Load Foundation
 $(document).foundation();
+
+store.subscribe(() => {
+  console.log('New state: ', store.getState());
+})
+
+store.dispatch(actions.addTodo('Learn Redux'));
+store.dispatch(actions.setSearchText('Red'));
+store.dispatch(actions.toggleShowCompleted());
 
 // App css
 require('style!css!sass!applicationStyles');
