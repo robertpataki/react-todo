@@ -8,6 +8,8 @@ export var Todo = React.createClass({
   handleClick: function() {
     var {id, dispatch} = this.props;
 
+    this.refs.checkbox.checked = this.refs.checkbox.checked ? false : true;
+
     dispatch(actions.toggleTodo(id));
   },
 
@@ -25,7 +27,7 @@ export var Todo = React.createClass({
     return (
       <div className={todoClassName} onClick={this.handleClick}>
         <div>
-          <input type="checkbox" defaultChecked={completed} />
+          <input type="checkbox" ref="checkbox" defaultChecked={completed} />
         </div>
         <div>
           <p>{text}</p>
