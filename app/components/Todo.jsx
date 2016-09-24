@@ -1,10 +1,14 @@
 const moment = require('moment');
 const React = require('react');
+const {connect} = require('react-redux');
+const actions = require('actions');
 
-var Todo = React.createClass({
+// Raw component
+export var Todo = React.createClass({
   handleClick: function() {
-    var {id} = this.props;
-    this.props.onToggle(id);
+    var {id, dispatch} = this.props;
+
+    dispatch(actions.toggleTodo(id));
   },
 
   render: function() {
@@ -14,8 +18,8 @@ var Todo = React.createClass({
     var renderDate = () => {
       var message = completed ? 'Completed ' : 'Created ';
       var timestamp = completed ? completedAt : createdAt;
+
       return message + moment.unix(timestamp).fromNow();
-      // return message + moment.unix(timestamp).format('MMM Do YYYY @ h:mm a');
     }
 
     return (
@@ -32,4 +36,5 @@ var Todo = React.createClass({
   }
 });
 
-module.exports = Todo;
+// Reduxed component
+export default connect()(Todo);
