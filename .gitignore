@@ -24,3 +24,4 @@ npm-debug.log
 bower_components
 
 public/bundle.js
+config/*
