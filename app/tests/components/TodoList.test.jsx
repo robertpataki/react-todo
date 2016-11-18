@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 
 import TestUtils from 'react-addons-test-utils';
-import $ from 'jQuery';
+import $ from 'jquery';
 import expect from 'expect';
 
 import * as configureStore from 'configureStore';

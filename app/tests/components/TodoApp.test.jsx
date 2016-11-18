@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import TestUtils from 'react-addons-test-utils';
 import expect from 'expect';
 import moment from 'moment';
-import $ from 'jQuery';
+import $ from 'jquery';
 
 import * as configureStore from 'configureStore';
 import TodoApp from 'TodoApp';
