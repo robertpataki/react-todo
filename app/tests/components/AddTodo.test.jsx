@@ -1,12 +1,12 @@
-const React = require('react');
-const ReactDOM = require('react-dom');
+import React from 'react';
+import ReactDOM from 'react-dom';
 
-const TestUtils = require('react-addons-test-utils');
-const $ = require('jQuery');
-const expect = require('expect');
+import TestUtils from 'react-addons-test-utils';
+import $ from 'jQuery';
+import expect from 'expect';
+import * as actions from 'actions';
 
-
-var {AddTodo} = require('AddTodo');
+const { AddTodo } = require('AddTodo');
 
 describe('AddTodo', () => {
   it('should exist', () => {
@@ -14,20 +14,17 @@ describe('AddTodo', () => {
   });
 
   it('should dispatch ADD_TODO when valid todo text', () => {
-    var action = {
-      type: 'ADD_TODO',
-      text: 'Adding a new todo'
-    }
+    const todoText = 'Adding a new todo'
+    const action = actions.startAddTodo(todoText);
 
-    var spy = expect.createSpy();
-    var addTodo = TestUtils.renderIntoDocument(<AddTodo dispatch={spy} />);
+    const spy = expect.createSpy();
+    const addTodo = TestUtils.renderIntoDocument(<AddTodo dispatch={ spy } />);
 
-    var $el = $(ReactDOM.findDOMNode(addTodo));
-    var formEl = $($el.find('form'))[0];
-    var todoInput = $(formEl).find('input')[0];
+    const $el = $(ReactDOM.findDOMNode(addTodo));
+    const formEl = $($el.find('form'))[0];
+    const todoInput = $(formEl).find('input')[0];
 
     todoInput.value = action.text;
-
     TestUtils.Simulate.submit(formEl);
 
     expect(todoInput.value).toBe('');
@@ -35,14 +32,14 @@ describe('AddTodo', () => {
   });
 
   it('should not call ADD_TODO with an invalid todo text', () => {
-    var spy = expect.createSpy();
-    var addTodo = TestUtils.renderIntoDocument(<AddTodo dispatch={spy} />);
+    const spy = expect.createSpy();
+    const addTodo = TestUtils.renderIntoDocument(<AddTodo dispatch={ spy } />);
 
-    var $el = $(ReactDOM.findDOMNode(addTodo));
-    var formEl = $($el.find('form'))[0];
-    var todoInput = $(formEl).find('input')[0];
+    const $el = $(ReactDOM.findDOMNode(addTodo));
+    const formEl = $($el.find('form'))[0];
+    const todoInput = $(formEl).find('input')[0];
 
-    var todoText = '';
+    const todoText = '';
     todoInput.value = todoText;
 
     TestUtils.Simulate.submit(formEl);

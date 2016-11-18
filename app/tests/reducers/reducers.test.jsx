@@ -1,7 +1,7 @@
-const expect = require('expect');
-const reducers = require('reducers');
-const df = require('deep-freeze-strict');
-const moment = require('moment');
+import expect from 'expect';
+import { searchTextReducer, toggleShowCompletedReducer, todosReducer } from 'reducers';
+import df from 'deep-freeze-strict';
+import moment from 'moment';
 
 describe('Reducers', () => {
   describe('searchTextReducer', () => {
@@ -11,7 +11,7 @@ describe('Reducers', () => {
         searchText: 'Searching for...'
       };
 
-      var response = reducers.searchTextReducer(df(''), df(action));
+      var response = searchTextReducer(df(''), df(action));
       expect(response).toEqual(action.searchText);
     });
   });
@@ -22,7 +22,7 @@ describe('Reducers', () => {
         type: 'TOGGLE_SHOW_COMPLETED'
       };
 
-      var response = reducers.toggleShowCompletedReducer(df(false), df(action));
+      var response = toggleShowCompletedReducer(df(false), df(action));
       expect(response).toEqual(true);
     });
   });
@@ -31,12 +31,17 @@ describe('Reducers', () => {
     it('should add new todo', () => {
       var action = {
         type: 'ADD_TODO',
-        text: 'New todo to be done later'
+        todo: {
+          id: 'abc123',
+          text: 'New todo to be done later',
+          completed: false,
+          createdAt: 1234,
+        }
       }
 
-      var response = reducers.todosReducer(df([]), df(action));
+      var response = todosReducer(df([]), df(action));
       expect(response.length).toBe(1);
-      expect(response[0].text).toEqual(action.text);
+      expect(response[0]).toEqual(action.todo);
     });
 
     it('should toggle todo', () => {
@@ -64,7 +69,7 @@ describe('Reducers', () => {
         completed: false
       }];
 
-      var response = reducers.todosReducer(df(todos), df(action));
+      var response = todosReducer(df(todos), df(action));
 
       expect(response[0].completed).toBe(false);
       expect(response[0].completedAt).toEqual(undefined);
@@ -78,7 +83,7 @@ describe('Reducers', () => {
         ]
       };
 
-      var response = reducers.todosReducer(df([]), df(action));
+      var response = todosReducer(df([]), df(action));
       expect(response.length).toEqual(1);
       expect(response[0]).toEqual(action.todos[0]);
     });

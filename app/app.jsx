@@ -14,12 +14,9 @@ $(document).foundation();
 store.subscribe(() => {
   var state = store.getState();
   TodoAPI.setTodos(state.todos);
-
-  console.log('New state: ', state);
 })
 
 var initialTodos = TodoAPI.getTodos();
-console.log(initialTodos);
 store.dispatch(actions.addTodos(initialTodos));
 
 // App css
