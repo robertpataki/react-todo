@@ -1,12 +1,12 @@
-const moment = require('moment');
-const React = require('react');
-const {connect} = require('react-redux');
-const actions = require('actions');
+import moment from 'moment';
+import React from 'react';
+import { connect } from 'react-redux';
+import * as actions from 'actions';
 
 // Raw component
-export var Todo = React.createClass({
+export const Todo = React.createClass({
   handleClick: function() {
-    var {id, dispatch} = this.props;
+    const { id, dispatch } = this.props;
 
     this.refs.checkbox.checked = this.refs.checkbox.checked ? false : true;
 
@@ -14,12 +14,12 @@ export var Todo = React.createClass({
   },
 
   render: function() {
-    var {id, text, completed, createdAt, completedAt} = this.props;
-    var todoClassName = completed ? 'todo todo-completed' : 'todo';
+    const { id, text, completed, createdAt, completedAt } = this.props;
+    const todoClassName = completed ? 'todo todo-completed' : 'todo';
 
-    var renderDate = () => {
-      var message = completed ? 'Completed ' : 'Created ';
-      var timestamp = completed ? completedAt : createdAt;
+    const renderDate = () => {
+      const message = completed ? 'Completed ' : 'Created ';
+      const timestamp = completed ? completedAt : createdAt;
 
       return message + moment.unix(timestamp).fromNow();
     }
@@ -27,7 +27,7 @@ export var Todo = React.createClass({
     return (
       <div className={todoClassName} onClick={this.handleClick}>
         <div>
-          <input type="checkbox" ref="checkbox" defaultChecked={completed} />
+          <input type="checkbox" ref="checkbox" defaultChecked={ completed } />
         </div>
         <div>
           <p>{text}</p>

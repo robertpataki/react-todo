@@ -1,6 +1,5 @@
-const expect = require('expect');
-
-const TodoAPI = require('TodoAPI');
+import expect from 'expect';
+import TodoAPI from 'TodoAPI';
 
 describe('TodoAPI', () => {
   it('it should exist', () => {
@@ -62,45 +61,45 @@ describe('TodoAPI', () => {
   });
 
   describe('filterTodos', () => {
-    var todos = [{
+    const todos = [{
       id: 1,
       text: 'Some text here',
-      completed: true
+      completed: true,
     }, {
       id: 2,
       text: 'Some more text here',
-      completed: false
+      completed: false,
     }, {
       id: 3,
       text: 'Even more text here',
-      completed: true
+      completed: true,
     }];
 
     // Filter by completed status
     it('should return all todos if `showCompleted` is true', () => {
-      var filteredTodos = TodoAPI.filterTodos(todos, true, '');
+      const filteredTodos = TodoAPI.filterTodos(todos, true, '');
       expect(filteredTodos.length).toBe(3);
     });
 
     it('should return only the incomplete todos if `showCompleted` is false', () => {
-      var filteredTodos = TodoAPI.filterTodos(todos, false, '');
+      const filteredTodos = TodoAPI.filterTodos(todos, false, '');
       expect(filteredTodos.length).toBe(1);
     });
 
     it('should sort by completed status', () => {
-      var filteredTodos = TodoAPI.filterTodos(todos, true, '');
+      const filteredTodos = TodoAPI.filterTodos(todos, true, '');
       expect(filteredTodos[0].completed).toBe(false);
     });
 
 
     // Filter by search keyword
     it('should return every todo item if the search keyword is an empty string', () => {
-      var filteredTodos = TodoAPI.filterTodos(todos, true, '');
+      const filteredTodos = TodoAPI.filterTodos(todos, true, '');
       expect(filteredTodos.length).toBe(3);
     });
 
     it('should return every todo item if the search keyword is a valid string', () => {
-      var filteredTodos = TodoAPI.filterTodos(todos, true, 'some');
+      const filteredTodos = TodoAPI.filterTodos(todos, true, 'some');
       expect(filteredTodos.length).toBe(2);
     });
   });

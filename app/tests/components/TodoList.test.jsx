@@ -1,15 +1,14 @@
-const React = require('react');
-const ReactDOM = require('react-dom');
-const {Provider} = require('react-redux');
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
 
-const TestUtils = require('react-addons-test-utils');
-const $ = require('jQuery');
-const expect = require('expect');
+import TestUtils from 'react-addons-test-utils';
+import $ from 'jQuery';
+import expect from 'expect';
 
-import {configure} from 'configureStore';
-// Super duper ES6 import to fetch both Raw and Reduxed TodoList modules
-import ConnectedTodoList, {TodoList} from 'TodoList';
-import ConnectedTodo, {Todo} from 'Todo';
+import * as configureStore from 'configureStore';
+import ConnectedTodoList, { TodoList } from 'TodoList';
+import ConnectedTodo, { Todo } from 'Todo';
 
 describe('TodoList', () => {
   it('should exist', () => {
@@ -17,42 +16,42 @@ describe('TodoList', () => {
   });
 
   it('should render 1 todo component for each Todo item', () => {
-    var todos = [
+    const todos = [
       {
         id: 1,
         text: 'Todo #1',
         completed: false,
         completedAt: undefined,
-        createdAt: 500
+        createdAt: 500,
       }, {
         id: 2,
         text: 'Todo #2',
         completed: false,
         completedAt: undefined,
-        createdAt: 500
+        createdAt: 500,
       }
     ];
 
-    var store = configure({
-      todos
+    const store = configureStore.configure({
+      todos,
     });
 
-    var provider = TestUtils.renderIntoDocument(
+    const provider = TestUtils.renderIntoDocument(
       <Provider store={store}>
         <ConnectedTodoList />
       </Provider>
     );
-    var todoList = TestUtils.scryRenderedComponentsWithType(provider, ConnectedTodoList)[0];
-    var todoComponents = TestUtils.scryRenderedComponentsWithType(todoList, ConnectedTodo);
+    const todoList = TestUtils.scryRenderedComponentsWithType(provider, ConnectedTodoList)[0];
+    const todoComponents = TestUtils.scryRenderedComponentsWithType(todoList, ConnectedTodo);
 
     expect(todoComponents.length).toBe(todos.length);
   });
 
   it('should render a message when there are no to dos', () => {
-    var todos = [];
-    var todoList = TestUtils.renderIntoDocument(<TodoList todos={todos}/>);
-    var $el = $(ReactDOM.findDOMNode(todoList));
-    var $message = $el.find('.container__message');
+    const todos = [];
+    const todoList = TestUtils.renderIntoDocument(<TodoList todos={ todos } />);
+    const $el = $(ReactDOM.findDOMNode(todoList));
+    const $message = $el.find('.container__message');
 
     expect($message.length).toBe(1);
   });

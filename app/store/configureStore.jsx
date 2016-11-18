@@ -3,14 +3,14 @@ import thunk from 'redux-thunk';
 
 import { searchTextReducer, todosReducer, toggleShowCompletedReducer } from 'reducers';
 
-export var configure = (initialState = {}) => {
-  var reducer = redux.combineReducers({
+export const configure = (initialState = {}) => {
+  const reducer = redux.combineReducers({
     searchText: searchTextReducer,
     todos: todosReducer,
-    showCompleted: toggleShowCompletedReducer
+    showCompleted: toggleShowCompletedReducer,
   });
 
-  var store = redux.createStore(reducer, initialState, redux.compose(
+  const store = redux.createStore(reducer, initialState, redux.compose(
     redux.applyMiddleware(thunk),
     window.devToolsExtension ? window.devToolsExtension() : f => f
   ));

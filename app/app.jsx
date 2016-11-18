@@ -1,12 +1,12 @@
-const React = require('react');
-const ReactDOM = require('react-dom');
-const {Provider} = require('react-redux');
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
 
-const TodoApp = require('TodoApp');
+import * as actions from 'actions';
+import * as configureStore from 'configureStore';
 
-const actions = require('actions');
-const store = require('configureStore').configure();
-const TodoAPI = require('TodoAPI');
+import TodoApp from 'TodoApp';
+import TodoAPI from 'TodoAPI';
 
 // Load Foundation
 $(document).foundation();
@@ -23,7 +23,7 @@ store.dispatch(actions.addTodos(initialTodos));
 require('style!css!sass!applicationStyles');
 
 ReactDOM.render(
-  <Provider store={store}>
+  <Provider store={ store }>
     <TodoApp />
   </Provider>,
   document.getElementById('app')

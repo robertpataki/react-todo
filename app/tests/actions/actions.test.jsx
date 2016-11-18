@@ -40,12 +40,12 @@ describe('Actions', () => {
       const actions = store.getActions();
       const firstAction = actions[0];
       expect(firstAction).toInclude({
-        type: 'ADD_TODO'
+        type: 'ADD_TODO',
       });
 
       expect(firstAction).toInclude({
         todo: {
-          text: todoText
+          text: todoText,
         }
       });
 
@@ -57,8 +57,8 @@ describe('Actions', () => {
     const action = {
       type: 'ADD_TODOS',
       todos: [
-        {id: 1, text: 'Blah', createdAt: 100, completed: false, completedAt: undefined},
-        {id: 2, text: 'Meh', createdAt: 200, completed: true, completedAt: 400}
+        { id: 1, text: 'Blah', createdAt: 100, completed: false, completedAt: undefined },
+        { id: 2, text: 'Meh', createdAt: 200, completed: true, completedAt: 400 }
       ]
     };
 
@@ -89,7 +89,7 @@ describe('Actions', () => {
   });
 
   describe('Tests with Firebase todos', () => {
-    var testTodoRef;
+    let testTodoRef;
 
     beforeEach((done) => {
       testTodoRef = firebaseRef.child('todos').push();

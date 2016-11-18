@@ -1,4 +1,4 @@
-const $ = require('jQuery');
+import $ from 'jQuery';
 
 module.exports = {
   setTodos: function(todos) {
@@ -22,7 +22,7 @@ module.exports = {
   },
 
   filterTodos: function (todos, showCompleted, searchText) {
-    var filteredTodos = todos;
+    let filteredTodos = todos;
     searchText = searchText.toLowerCase();
 
     // Filter by showCompleted
@@ -32,7 +32,7 @@ module.exports = {
 
     // Filter by searchText
     filteredTodos = filteredTodos.filter((todo) => {
-      var text = todo.text.toLowerCase();
+      const text = todo.text.toLowerCase();
       return searchText.length === 0 || text.indexOf(searchText) >= 0;
     });
 
@@ -46,7 +46,6 @@ module.exports = {
         return 0;
       }
     });
-
 
     return filteredTodos;
   }

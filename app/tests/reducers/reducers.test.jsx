@@ -6,30 +6,30 @@ import moment from 'moment';
 describe('Reducers', () => {
   describe('searchTextReducer', () => {
     it('set searchText', () => {
-      var action = {
+      const action = {
         type: 'SET_SEARCH_TEXT',
         searchText: 'Searching for...'
       };
 
-      var response = searchTextReducer(df(''), df(action));
+      const response = searchTextReducer(df(''), df(action));
       expect(response).toEqual(action.searchText);
     });
   });
 
   describe('toggleShowCompletedReducer', () => {
     it('should toggle showCompleted', () => {
-      var action = {
+      const action = {
         type: 'TOGGLE_SHOW_COMPLETED'
       };
 
-      var response = toggleShowCompletedReducer(df(false), df(action));
+      const response = toggleShowCompletedReducer(df(false), df(action));
       expect(response).toEqual(true);
     });
   });
 
   describe('todosReducer', () => {
     it('should add new todo', () => {
-      var action = {
+      const action = {
         type: 'ADD_TODO',
         todo: {
           id: 'abc123',
@@ -39,7 +39,7 @@ describe('Reducers', () => {
         }
       }
 
-      var response = todosReducer(df([]), df(action));
+      const response = todosReducer(df([]), df(action));
       expect(response.length).toBe(1);
       expect(response[0]).toEqual(action.todo);
     });
@@ -70,14 +70,14 @@ describe('Reducers', () => {
     });
 
     it('should add existing todos', () => {
-      var action = {
+      const action = {
         type: 'ADD_TODOS',
         todos: [
-          {id: 1, text: 'Blah', createdAt: 100, completed: false, completedAt: undefined}
+          { id: 1, text: 'Blah', createdAt: 100, completed: false, completedAt: undefined }
         ]
       };
 
-      var response = todosReducer(df([]), df(action));
+      const response = todosReducer(df([]), df(action));
       expect(response.length).toEqual(1);
       expect(response[0]).toEqual(action.todos[0]);
     });
