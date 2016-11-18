@@ -10,17 +10,11 @@ import TodoAPI from 'TodoAPI';
 
 // Load Foundation
 $(document).foundation();
-
-store.subscribe(() => {
-  var state = store.getState();
-  TodoAPI.setTodos(state.todos);
-})
-
-var initialTodos = TodoAPI.getTodos();
-store.dispatch(actions.addTodos(initialTodos));
-
 // App css
 require('style!css!sass!applicationStyles');
+
+const store = configureStore.configure();
+store.dispatch(actions.startAddTodos());
 
 ReactDOM.render(
   <Provider store={ store }>

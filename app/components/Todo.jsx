@@ -8,8 +8,6 @@ export const Todo = React.createClass({
   handleClick: function() {
     const { id, dispatch } = this.props;
 
-    this.refs.checkbox.checked = this.refs.checkbox.checked ? false : true;
-
     dispatch(actions.startToggleTodo(id, this.refs.checkbox.checked));
   },
 
@@ -25,15 +23,15 @@ export const Todo = React.createClass({
     }
 
     return (
-      <div className={todoClassName} onClick={this.handleClick}>
+      <label className={ todoClassName }>
         <div>
-          <input type="checkbox" ref="checkbox" defaultChecked={ completed } />
+          <input type="checkbox" ref="checkbox" defaultChecked={ completed } onChange={ this.handleClick } />
         </div>
         <div>
-          <p>{text}</p>
-          <p className="todo__subtext">{renderDate()}</p>
+          <p>{ text }</p>
+          <p className="todo__subtext">{ renderDate() }</p>
         </div>
-      </div>
+      </label>
     )
   }
 });

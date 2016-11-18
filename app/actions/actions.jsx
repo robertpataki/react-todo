@@ -42,9 +42,32 @@ export const startAddTodo = (text) => {
 };
 
 export const addTodos = (todos) => {
+  console.log('Actions - addTodos: ', todos);
+
   return {
     type: 'ADD_TODOS',
     todos,
+  };
+};
+
+export const startAddTodos = () => {
+  return (dispatch, getState) => {
+    const todosRef = firebaseRef.child('todos');
+
+    todosRef.once('value').then((snapshot) => {
+      const data = snapshot.val() || {};
+      const todos = [];
+      const keys = Object.keys(data);
+
+      keys.forEach(function(key){
+        todos.push({
+          id: key,
+          ...data[key],
+        });
+      });
+
+      dispatch(addTodos(todos));
+    });
   };
 };
 
