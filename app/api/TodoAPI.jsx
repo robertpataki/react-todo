@@ -3,6 +3,7 @@ import $ from 'jQuery';
 module.exports = {
   filterTodos: function (todos, showCompleted, searchText) {
     let filteredTodos = todos;
+    searchText = searchText || '';
     searchText = searchText.toLowerCase();
 
     // Filter by showCompleted
