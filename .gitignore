@@ -22,3 +22,5 @@ npm-debug.log
 
 # Bower
 bower_components
+
+public/bundle.js
