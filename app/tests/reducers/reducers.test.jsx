@@ -45,34 +45,28 @@ describe('Reducers', () => {
     });
 
     it('should toggle todo', () => {
-      var action = {
-        type: 'TOGGLE_TODO',
-        id: 1
-      }
-      var todos = [{
-        id: 1,
+      const todos = [{
+        id: '123',
         text: 'Todo #1',
         createdAt: 123,
+        completed: true,
         completedAt: 125,
-        completed: true
-      }, {
-        id: 2,
-        text: 'Todo #2',
-        createdAt: 321,
-        completedAt: 322,
-        completed: true
-      }, {
-        id: 3,
-        text: 'Todo #3',
-        createdAt: 333,
-        completedAt: undefined,
-        completed: false
       }];
+      const updates = {
+        completed: false,
+        completedAt: null,
+      };
+      const action = {
+        type: 'UPDATE_TODO',
+        id: todos[0].id,
+        updates
+      };
 
-      var response = todosReducer(df(todos), df(action));
+      const response = todosReducer(df(todos), df(action));
 
-      expect(response[0].completed).toBe(false);
-      expect(response[0].completedAt).toEqual(undefined);
+      expect(response[0].completed).toBe(updates.completed);
+      expect(response[0].completedAt).toEqual(updates.completedAt);
+      expect(response[0].text).toEqual(todos[0].text);
     });
 
     it('should add existing todos', () => {

@@ -10,7 +10,7 @@ export var Todo = React.createClass({
 
     this.refs.checkbox.checked = this.refs.checkbox.checked ? false : true;
 
-    dispatch(actions.toggleTodo(id));
+    dispatch(actions.startToggleTodo(id, this.refs.checkbox.checked));
   },
 
   render: function() {

@@ -44,7 +44,7 @@ describe('Actions', () => {
 
       expect(firstAction).toInclude({
         todo: {
-          text: todoText  
+          text: todoText
         }
       });
 
@@ -74,13 +74,16 @@ describe('Actions', () => {
     expect(response).toEqual(action);
   });
 
-  it('should generate toggle todo action', () => {
+  it('should generate update todo action', () => {
     const action = {
-      type: 'TOGGLE_TODO',
-      id: 2
+      type: 'UPDATE_TODO',
+      id: '123',
+      updates: {
+        completed: false
+      }
     };
 
-    const response = actions.toggleTodo(action.id);
+    const response = actions.updateTodo(action.id, action.updates);
     expect(response).toEqual(action);
   });
 });
