@@ -1,32 +1,34 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { Router, IndexRoute, Route, hashHistory } from 'react-router';
+import { hashHistory } from 'react-router';
 
 import * as configureStore from 'configureStore';
-
-import TodoApp from 'TodoApp';
-import TodoAPI from 'TodoAPI';
-import Main from 'Main';
-import Login from 'Login';
 import * as actions from 'actions';
+import firebase from 'app/firebase/';
+import router from 'app/router/';
+
+// Authentication state based redirects
+firebase.auth().onAuthStateChanged((user) => {
+  if(user) {
+    hashHistory.push('/todos');
+  } else {
+    hashHistory.push('/');
+  }
+});
 
 // Load Foundation
 $(document).foundation();
 // App css
 require('style!css!sass!applicationStyles');
 
+// Redux Store setup
 const store = configureStore.configure();
 store.dispatch(actions.startAddTodos());
 
 ReactDOM.render(
   <Provider store={ store }>
-    <Router history={ hashHistory }>
-      <Route path="/" component={ Main }>
-      	<IndexRoute component={ Login } />
-      	<Route path="todos" component={ TodoApp } />
-      </Route>
-    </Router>
+    { router }
   </Provider>,
   document.getElementById('app')
 );
