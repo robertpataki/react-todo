@@ -7,9 +7,6 @@ import * as actions from 'actions';
 export const Todo = React.createClass({
   handleClick: function() {
     const { id, dispatch } = this.props;
-
-    console.log(id, this.refs.checkbox.checked);
-
     dispatch(actions.startToggleTodo(id, this.refs.checkbox.checked));
   },
 
