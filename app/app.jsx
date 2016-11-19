@@ -11,8 +11,8 @@ import router from 'app/router/';
 // Authentication state based redirects
 firebase.auth().onAuthStateChanged((user) => {
   if(user) {
-    console.log('User is logged in! ', user.uid);
     store.dispatch(actions.login(user.uid));
+    store.dispatch(actions.startAddTodos());
     hashHistory.push('/todos');
   } else {
     hashHistory.push('/');
@@ -27,7 +27,6 @@ require('style!css!sass!applicationStyles');
 
 // Redux Store setup
 const store = configureStore.configure();
-store.dispatch(actions.startAddTodos());
 
 ReactDOM.render(
   <Provider store={ store }>
