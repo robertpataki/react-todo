@@ -11,9 +11,12 @@ import router from 'app/router/';
 // Authentication state based redirects
 firebase.auth().onAuthStateChanged((user) => {
   if(user) {
+    console.log('User is logged in! ', user.uid);
+    store.dispatch(actions.login(user.uid));
     hashHistory.push('/todos');
   } else {
     hashHistory.push('/');
+    store.dispatch(actions.logout());
   }
 });
 

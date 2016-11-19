@@ -32,7 +32,7 @@ export const todosReducer = (state = [], action) => {
           return {
             ...todo,
             ...action.updates,
-          }
+          };
         }
         return todo;
       });
@@ -41,6 +41,19 @@ export const todosReducer = (state = [], action) => {
         ...state,
         ...action.todos,
       ];
+    default:
+      return state;
+  }
+};
+
+export const authReducer = (state = {}, action) => {
+  switch (action.type) {
+    case 'LOG_IN':
+      return {
+        uid: action.uid
+      };
+    case 'LOG_OUT':
+      return {};
     default:
       return state;
   }

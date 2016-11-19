@@ -1,5 +1,5 @@
 import expect from 'expect';
-import { searchTextReducer, toggleShowCompletedReducer, todosReducer } from 'reducers';
+import { authReducer, searchTextReducer, toggleShowCompletedReducer, todosReducer } from 'reducers';
 import df from 'deep-freeze-strict';
 import moment from 'moment';
 
@@ -22,7 +22,7 @@ describe('Reducers', () => {
         type: 'TOGGLE_SHOW_COMPLETED'
       };
 
-      const response = toggleShowCompletedReducer(df(false), df(action));
+      const response = toggleShowCompletedReducer(undefined, df(action));
       expect(response).toEqual(true);
     });
   });
@@ -80,6 +80,30 @@ describe('Reducers', () => {
       const response = todosReducer(df([]), df(action));
       expect(response.length).toEqual(1);
       expect(response[0]).toEqual(action.todos[0]);
+    });
+  });
+
+  describe('authReducer', () => {
+    it('should toggle LOG_IN', () => {
+      const action = {
+        type: 'LOG_IN',
+        uid: '123456'
+      };
+
+      const response = authReducer(undefined, df(action));
+      expect(response).toEqual({ uid: action.uid });
+    });
+
+    it('should toggle LOG_OUT', () => {
+      const authData = {
+        uid: '123456'
+      };
+      const action = {
+        type: 'LOG_OUT'
+      };
+
+      const response = authReducer(df(authData), df(action));
+      expect(response).toEqual({});
     });
   });
 });
