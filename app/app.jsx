@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { hashHistory } from 'react-router';
+import { browserHistory } from 'react-router';
 
 import * as configureStore from 'configureStore';
 import * as actions from 'actions';
@@ -13,9 +13,9 @@ firebase.auth().onAuthStateChanged((user) => {
   if(user) {
     store.dispatch(actions.login(user.uid));
     store.dispatch(actions.startAddTodos());
-    hashHistory.push('/todos');
+    browserHistory.push('/todos');
   } else {
-    hashHistory.push('/');
+    browserHistory.push('/');
     store.dispatch(actions.logout());
   }
 });
