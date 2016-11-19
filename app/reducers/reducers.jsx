@@ -41,6 +41,8 @@ export const todosReducer = (state = [], action) => {
         ...state,
         ...action.todos,
       ];
+    case 'LOG_OUT':
+      return [];
     default:
       return state;
   }
