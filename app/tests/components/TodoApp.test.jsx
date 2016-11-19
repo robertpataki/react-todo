@@ -7,7 +7,7 @@ import moment from 'moment';
 import $ from 'jquery';
 
 import * as configureStore from 'configureStore';
-import TodoApp from 'TodoApp';
+import { TodoApp } from 'TodoApp';
 import TodoList from 'TodoList';
 
 
