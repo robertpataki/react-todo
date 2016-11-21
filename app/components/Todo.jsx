@@ -4,13 +4,19 @@ import { connect } from 'react-redux';
 import * as actions from 'actions';
 
 // Raw component
-export const Todo = React.createClass({
-  handleClick: function() {
+export class Todo extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick() {
     const { id, dispatch } = this.props;
     dispatch(actions.startToggleTodo(id, this.refs.checkbox.checked));
-  },
+  }
 
-  render: function() {
+  render() {
     const { id, text, completed, createdAt, completedAt } = this.props;
     const todoClassName = completed ? 'todo todo-completed' : 'todo';
 
@@ -33,7 +39,7 @@ export const Todo = React.createClass({
       </label>
     )
   }
-});
+}
 
 // Reduxed component
 export default connect()(Todo);

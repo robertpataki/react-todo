@@ -2,8 +2,14 @@ import React from 'react';
 import { connect } from 'react-redux';
 import * as actions from 'actions';
 
-export const AddTodo = React.createClass({
-  onSubmit: function(e) {
+export class AddTodo extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.onSubmit = this.onSubmit.bind(this);
+  }
+
+  onSubmit(e) {
     e.preventDefault();
 
     const { dispatch } = this.props;
@@ -15,18 +21,18 @@ export const AddTodo = React.createClass({
     }
 
     this.refs.todoText.focus();
-  },
+  }
 
-  render: function() {
+  render() {
     return (
       <div className="container__footer">
-        <form ref="form" onSubmit={this.onSubmit} className="add-todo">
+        <form ref="form" onSubmit={ this.onSubmit } className="add-todo">
           <input type="text" ref="todoText" placeholder="What's next" />
           <button type="submit" className="button expanded">Add Todo</button>
         </form>
       </div>
     );
   }
-});
+}
 
 export default connect()(AddTodo);

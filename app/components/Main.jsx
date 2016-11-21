@@ -1,13 +1,13 @@
 import React from 'react';
 
-export const Main = React.createClass({
-  render: function() {
+export class Main extends React.Component {
+  render() {
     return (
       <div>
         { this.props.children }
       </div>
     );
   }
-});
+}
 
 export default Main;

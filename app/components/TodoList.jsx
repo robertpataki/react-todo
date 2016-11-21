@@ -4,12 +4,8 @@ import { connect } from 'react-redux';
 import Todo from 'Todo';
 import TodoAPI from 'TodoAPI';
 
-export const TodoList = React.createClass({
-  propTypes: {
-    todos: React.PropTypes.array.isRequired,
-  },
-
-  render: function() {
+export class TodoList extends React.Component {
+  render() {
     const { todos, showCompleted, searchText } = this.props;
 
     const renderTodos = () => {
@@ -35,7 +31,11 @@ export const TodoList = React.createClass({
       </div>
     );
   }
-});
+}
+
+TodoList.propTypes = {
+  todos: React.PropTypes.array.isRequired,
+}
 
 export default connect(
   (state) => {
